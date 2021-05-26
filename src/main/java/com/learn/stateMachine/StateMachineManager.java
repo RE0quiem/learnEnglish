@@ -30,20 +30,20 @@ public class StateMachineManager {
             wrapper.setWords(each);
             return wrapper;
         }).collect(Collectors.toList());
-        this.startWordsWrapperList =wrapperList;
+        this.startWordsWrapperList = wrapperList;
 
         // setting algorithm todo here default
-        this.algorithm=new DefaultAlgorithm();
+        this.algorithm = new DefaultAlgorithm();
     }
 
 
     public void startPractice() {
-        this.stateMachine=new StateMachine(this.algorithm);
+        this.stateMachine = new StateMachine(this.algorithm);
 
-        runByTurn(startWordsWrapperList,1);
+        runByTurn(startWordsWrapperList, 1);
     }
 
-    private void runByTurn(List<WordsWrapper> turnList,int turn) {
+    private void runByTurn(List<WordsWrapper> turnList, int turn) {
         ArrayList<WordsWrapper> nextTurnList = new ArrayList<>();
         WordsWrapper thisTimeWordsResult;
         for (WordsWrapper wordsWrapper : this.algorithm.shufflePracticeWordsList(turnList)) {
@@ -54,7 +54,9 @@ public class StateMachineManager {
         }
 
         if (CollectionUtils.isNotEmpty(nextTurnList)) {
-            runByTurn(nextTurnList,turn+1);
+            runByTurn(nextTurnList, turn + 1);
         }
+
+        System.out.println("practice success!");
     }
 }

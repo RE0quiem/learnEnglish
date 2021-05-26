@@ -40,7 +40,7 @@ public class StateMachine {
     private String displayThePracticeWords(WordsWrapper wordsWrapper) {
         String displayStr = "words:%s  phoneticSymbol:%s  practiceTimes:%s";
         System.out.println(String.format(displayStr, wordsWrapper.getWords().getWords(), wordsWrapper.getWords().getPhoneticSymbol(), wordsWrapper.getErrorTimes()));
-        System.out.println("what means? eg(y|n)");
-        return CommonLineScan.getInputDateRange();
+        System.out.println("what means? eg(y|n|:q)");
+        return CommonLineScan.getInputDateRange((inputStr)-> !CommonLineScan.enumStrs.contains(inputStr));
     }
 }

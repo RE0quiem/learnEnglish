@@ -13,7 +13,7 @@ public class Test {
 
     @org.junit.jupiter.api.Test
     public void myTest() {
-        String str ="2021-04-24;2:2021-04-24 To 2021-05-13";
+        String str ="2021-05-13";
         Pattern.matches(p,str);
     }
 }

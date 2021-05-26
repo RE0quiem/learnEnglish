@@ -6,6 +6,7 @@ import com.learn.utils.CommonLineScan;
 import com.learn.utils.ParseExcel;
 
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,12 +26,15 @@ public class MainClass {
         String min = wordsList.stream().map(Words::getBuildDate).min(String::compareTo).get();
         System.out.println("start from " + min + ",end from " + max + ".please set date range to review words! eg (0:no input;1:2021-04-24;2:2021-04-24 To 2021-05-13)");
 
-        String inputDateRange = CommonLineScan.getInputDateRange();
-        if (inputDateRange == null) {
-            return;
-        }
+        String inputDateRange = CommonLineScan.getInputDateRange((inputStr) -> !(Pattern.matches(CommonLineScan.p, inputStr) || CommonLineScan.QUIT.equals(inputStr)),
+                (inputStr) -> {
+                    if (inputStr == null || "".equals(inputStr)) {
+                        return min + " To " + max;
+                    }
+                    return inputStr;
+                });
 
-        String dateRange = (inputDateRange == null || inputDateRange.equals("")) ? min + " To " + max : inputDateRange;
+        String dateRange = inputDateRange.equals("") ? min + " To " + max : inputDateRange;
         List<String> rangeBeHandle = Stream.of(dateRange.split("To")).map(String::trim).collect(Collectors.toList());
 
         List<Words> practiceWords = wordsList.stream().filter(e -> {

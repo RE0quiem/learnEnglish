@@ -15,6 +15,14 @@ import com.learn.utils.CommonLineScan;
 public class StateMachine {
     private Algorithm algorithm;
     private WordsWrapper wordsWrapper;
+    private String practiceBoxTop =".================================================================.\n" +
+            "||                            words:%s\n" +
+            "||             phoneticSymbol:%s  practiceTimes:%s\n" +
+            "|'--------------------------------------------------------------'|\n" +
+            "||           what means?                  eg(y|n|:q)            ||\n" +
+            ".'=============================================================='.";
+
+    private String nextStepStrTemplate="\t\t\t\t\t↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓";
 
     public StateMachine(Algorithm algorithm) {
         this.algorithm = algorithm;
@@ -22,7 +30,6 @@ public class StateMachine {
 
 
     public WordsWrapper run(WordsWrapper wordsWrapper, int turn) {
-        System.out.println("=============================================================================================");
         // display the practice words
         String practiceResult = displayThePracticeWords(wordsWrapper);
         // input Y | input N
@@ -32,15 +39,12 @@ public class StateMachine {
             algorithm.onError(wordsWrapper);
         }
         // complete
-        System.out.println("=============================================================================================");
-        System.out.println("\n");
+        System.out.println(nextStepStrTemplate+"\n");
         return wordsWrapper;
     }
 
     private String displayThePracticeWords(WordsWrapper wordsWrapper) {
-        String displayStr = "words:%s  phoneticSymbol:%s  practiceTimes:%s";
-        System.out.println(String.format(displayStr, wordsWrapper.getWords().getWords(), wordsWrapper.getWords().getPhoneticSymbol(), wordsWrapper.getErrorTimes()));
-        System.out.println("what means? eg(y|n|:q)");
+        System.out.println(String.format(practiceBoxTop,wordsWrapper.getWords().getWords(), wordsWrapper.getWords().getPhoneticSymbol(), wordsWrapper.getErrorTimes()));
         return CommonLineScan.getInputDateRange((inputStr)-> !CommonLineScan.enumStrs.contains(inputStr));
     }
 }

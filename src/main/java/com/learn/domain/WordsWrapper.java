@@ -1,7 +1,5 @@
 package com.learn.domain;
 
-import lombok.Data;
-
 /**
  * @author zjz
  * @version 1.0
@@ -10,8 +8,23 @@ import lombok.Data;
  * @date 2021/5/16 下午2:31
  * @since JDK 1.8
  */
-@Data
 public class WordsWrapper {
     private int errorTimes;
     private Words words;
+
+    public int getErrorTimes() {
+        return errorTimes;
+    }
+
+    public void setErrorTimes(int errorTimes) {
+        this.errorTimes = errorTimes;
+    }
+
+    public Words getWords() {
+        return words;
+    }
+
+    public void setWords(Words words) {
+        this.words = words;
+    }
 }

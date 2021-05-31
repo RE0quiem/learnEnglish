@@ -1,7 +1,6 @@
 package com.learn.utils;
 
 import com.learn.domain.Words;
-import lombok.SneakyThrows;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -10,6 +9,7 @@ import org.apache.poi.ss.usermodel.Row;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -48,12 +48,24 @@ public class ParseExcel {
         return wordsList;
     }
 
-    @SneakyThrows
     private void readFile() {
         File file = new File(this.url.getFile());
-        InputStream inputStream = new FileInputStream(file);
+        HSSFWorkbook wb = null;
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream(file);
 
-        HSSFWorkbook wb = new HSSFWorkbook(inputStream);
+            wb = new HSSFWorkbook(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         HSSFSheet sheet = wb.getSheetAt(0);
         Iterator<Row> itr = sheet.iterator();
         Iterator<Cell> cellItr;

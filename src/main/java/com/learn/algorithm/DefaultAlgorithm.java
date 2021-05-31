@@ -31,11 +31,11 @@ public class DefaultAlgorithm implements Algorithm{
     public List<WordsWrapper> shufflePracticeWordsList(List<WordsWrapper> list) {
         return list.stream().sorted((words1,words2)->{
             if (words1.getErrorTimes() - words2.getErrorTimes() > 0) {
-                return 1;
+                return -1;
             } else if (words1.getErrorTimes() - words2.getErrorTimes() == 0) {
                 return words1.getWords().getWords().compareToIgnoreCase(words2.getWords().getWords());
             } else {
-                return -1;
+                return 1;
             }
         }).collect(Collectors.toList());
     }

@@ -3,10 +3,8 @@ package com.learn.utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.regex.Pattern;
 
 /**
  * @author zjz
@@ -42,7 +40,7 @@ public class CommonLineScan {
                 scan.close();
                 interruptedMainThread();
             } else if (scanContinuePredicate.test(inputStr)) {
-                System.out.println("do not input illegal character,please reInput");
+                ConsoleDisplayUtils.illegalInput();
                 getInputDateRange(scanContinuePredicate);
             }
         }

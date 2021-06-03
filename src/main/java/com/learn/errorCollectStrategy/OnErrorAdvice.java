@@ -6,8 +6,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
-import java.util.Arrays;
-
 /**
  * @author zhanjingzhi-wb
  * @version 1.0
@@ -20,10 +18,9 @@ import java.util.Arrays;
 public class OnErrorAdvice {
 
 
-    @Around(value = "execution(* com.learn.algorithm.Algorithm.onError(*))")
+    @Around(value = "execution(* com.learn.algorithm.AbstractAlgorithm.handleError(*))")
     public Object onErrorCollectStrategy(ProceedingJoinPoint joinPoint) throws Throwable {
         WordsWrapper wordsWrapper = (WordsWrapper) joinPoint.getArgs()[0];
-        System.out.println(wordsWrapper);
         if (wordsWrapper.getErrorTimes() >= StateMachineManager.recordWordErrorTimes-1) {
             StateMachineManager.errorTimesOverSpecialTimesList.add(wordsWrapper);
         }

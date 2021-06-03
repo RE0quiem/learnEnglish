@@ -21,9 +21,12 @@ public class Words {
 
     @Override
     public String toString() {
-        String template = "-----------------------------------------------------------------\n" +
-                "words:%s  phoneticSymbol:%s  characteristic:%s  means:%s  phrase:%s  exampleSentence:%s\n" +
-                "-----------------------------------------------------------------";
+        String template =
+                "\n" +
+                "|'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'|\n" +
+                "||    words:%s  phoneticSymbol:%s  characteristic:%s  means:%s  phrase:%s  exampleSentence:%s \n" +
+                ".'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'.\n" +
+                "\n";
         return String.format(template, words, phoneticSymbol, characteristic, means, phrase, exampleSentence);
     }
 

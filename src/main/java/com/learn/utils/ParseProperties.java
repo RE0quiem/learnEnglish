@@ -1,5 +1,7 @@
 package com.learn.utils;
 
+import org.eclipse.core.runtime.Assert;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,7 +21,7 @@ public class ParseProperties {
     public Properties parseProperties() {
         URL resource = getClass().getClassLoader().getResource("properties.properties");
         Properties properties = new Properties();
-        assert resource != null;
+        Assert.isTrue(resource != null);
         File file = new File(resource.getFile());
         if (file.exists()) {
             InputStream inStream = null;

@@ -11,7 +11,6 @@ import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -25,18 +24,18 @@ import java.util.TreeMap;
  * @since JDK 1.8
  */
 public class PluginManager {
-    private PluginManager instence = new PluginManager();
+    private static PluginManager instence = new PluginManager();
 
     private Map<String,Plugin> beforePlugins=new TreeMap<>();
 
     private Map<String,Plugin> afterPlugins=new TreeMap<>();
 
-    public PluginManager getInstence() {
+    public static PluginManager getInstence() {
         return instence;
     }
 
 
-    public PluginManager() throws Exception{
+    public PluginManager(){
         // 初始化加载插件
         Reflections reflections = new Reflections("com.learn.plugin.*", Arrays.asList(
                 new SubTypesScanner(false)
@@ -49,13 +48,25 @@ public class PluginManager {
         Set<Class<?>> afterTypeClazzs = reflections.getTypesAnnotatedWith(AfterType.class);
         Set<Class<?>> beforeTypeClazzs = reflections.getTypesAnnotatedWith(BeforeType.class);
 
-        for (Class<?> clazz : beforeTypeClazzs) {
-            beforePlugins.put(clazz.getName(),(Plugin) clazz.newInstance());
+        try {
+            for (Class<?> clazz : beforeTypeClazzs) {
+                beforePlugins.put(clazz.getName(),(Plugin) clazz.newInstance());
+            }
+
+            for (Class<?> clazz : afterTypeClazzs) {
+                afterPlugins.put(clazz.getName(),(Plugin)clazz.newInstance());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        for (Class<?> clazz : afterTypeClazzs) {
-            afterPlugins.put(clazz.getName(),(Plugin)clazz.newInstance());
-        }
+    }
 
+    public Map<String, Plugin> getBeforePlugins() {
+        return beforePlugins;
+    }
+
+    public Map<String, Plugin> getAfterPlugins() {
+        return afterPlugins;
     }
 }

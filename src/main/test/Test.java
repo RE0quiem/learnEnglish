@@ -7,7 +7,6 @@ import org.reflections.scanners.MethodParameterNamesScanner;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -41,5 +40,10 @@ public class Test {
         ));
         Set<Class<?>> typesAnnotatedWith = reflections.getTypesAnnotatedWith(BeforeType.class,true);
         System.out.println(typesAnnotatedWith);
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testFileWrite() {
+//        WriteFile.writeFile(null,"aaaa");?
     }
 }

@@ -1,8 +1,10 @@
 package com.learn.main;
 
+import com.learn.algorithm.DefaultAlgorithm;
 import com.learn.domain.Words;
 import com.learn.stateMachine.StateMachineManager;
 import com.learn.utils.CommonLineScan;
+import com.learn.utils.ConsoleDisplayUtils;
 import com.learn.utils.ParseExcel;
 
 import java.util.List;
@@ -24,7 +26,7 @@ public class MainClass {
         List<Words> wordsList = parseExcel.getWordsList();
         String max = wordsList.stream().map(Words::getBuildDate).max(String::compareTo).get();
         String min = wordsList.stream().map(Words::getBuildDate).min(String::compareTo).get();
-        System.out.println("start from " + min + ",end from " + max + ".please set date range to review words! eg (0:no input;1:2021-04-24;2:2021-04-24 To 2021-05-13)");
+        ConsoleDisplayUtils.choosePracticePeriod(min,max);
 
         String inputDateRange = CommonLineScan.getInputDateRange((inputStr) -> !(Pattern.matches(CommonLineScan.p, inputStr) || CommonLineScan.QUIT.equals(inputStr)),
                 (inputStr) -> {
@@ -37,14 +39,8 @@ public class MainClass {
         String dateRange = inputDateRange.equals("") ? min + " To " + max : inputDateRange;
         List<String> rangeBeHandle = Stream.of(dateRange.split("To")).map(String::trim).collect(Collectors.toList());
 
-        List<Words> practiceWords = wordsList.stream().filter(e -> {
-            if (rangeBeHandle.size() == 1) {
-                return e.getBuildDate().equals(rangeBeHandle.get(0));
-            }
-            return e.getBuildDate().compareTo(rangeBeHandle.get(0)) >= 0 && e.getBuildDate().compareTo(rangeBeHandle.get(1)) <= 0;
-        }).collect(Collectors.toList());
 
-        StateMachineManager machineManager = new StateMachineManager(practiceWords);
+        StateMachineManager machineManager = new StateMachineManager(wordsList,rangeBeHandle,new DefaultAlgorithm());
         machineManager.startPractice();
     }
 

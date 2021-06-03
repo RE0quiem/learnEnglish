@@ -6,6 +6,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.eclipse.core.runtime.Assert;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -130,7 +131,7 @@ public class ParseExcel {
     }
 
     private void wordsSetMeans(List<String> meansList, Words words, String means) {
-        assert meansList != null;
+        Assert.isTrue(meansList != null);
         if (words.getMeans() == null) {
             words.setMeans(meansList);
         }

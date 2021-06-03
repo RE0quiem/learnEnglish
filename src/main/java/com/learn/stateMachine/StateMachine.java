@@ -1,8 +1,9 @@
 package com.learn.stateMachine;
 
-import com.learn.algorithm.Algorithm;
+import com.learn.algorithm.AbstractAlgorithm;
 import com.learn.domain.WordsWrapper;
 import com.learn.utils.CommonLineScan;
+import com.learn.utils.ConsoleDisplayUtils;
 
 /**
  * @author zjz
@@ -13,18 +14,8 @@ import com.learn.utils.CommonLineScan;
  * @since JDK 1.8
  */
 public class StateMachine {
-    private Algorithm algorithm;
-    private WordsWrapper wordsWrapper;
-    private String practiceBoxTop =".================================================================.\n" +
-            "||                            words:%s\n" +
-            "||             phoneticSymbol:%s  practiceTimes:%s\n" +
-            "|'--------------------------------------------------------------'|\n" +
-            "||           what means?                  eg(y|n|:q)            ||\n" +
-            ".'=============================================================='.";
-
-    private String nextStepStrTemplate="\t\t\t\t\t↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓";
-
-    public StateMachine(Algorithm algorithm) {
+    private AbstractAlgorithm algorithm;
+    public StateMachine(AbstractAlgorithm algorithm) {
         this.algorithm = algorithm;
     }
 
@@ -34,17 +25,17 @@ public class StateMachine {
         String practiceResult = displayThePracticeWords(wordsWrapper);
         // input Y | input N
         if ("y".equals(practiceResult)) {
-            algorithm.onSuccess(wordsWrapper);
+            algorithm.handleSuccess(wordsWrapper);
         } else {
-            algorithm.onError(wordsWrapper);
+            algorithm.handleError(wordsWrapper);
         }
         // complete
-        System.out.println(nextStepStrTemplate+"\n");
+       ConsoleDisplayUtils.nextStep();
         return wordsWrapper;
     }
 
     private String displayThePracticeWords(WordsWrapper wordsWrapper) {
-        System.out.println(String.format(practiceBoxTop,wordsWrapper.getWords().getWords(), wordsWrapper.getWords().getPhoneticSymbol(), wordsWrapper.getErrorTimes()));
+        ConsoleDisplayUtils.displayThePracticeWords(wordsWrapper);
         return CommonLineScan.getInputDateRange((inputStr)-> !CommonLineScan.enumStrs.contains(inputStr));
     }
 }

@@ -26,12 +26,14 @@ public class MainClass {
         List<Words> wordsList = parseExcel.getWordsList();
         String max = wordsList.stream().map(Words::getBuildDate).max(String::compareTo).get();
         String min = wordsList.stream().map(Words::getBuildDate).min(String::compareTo).get();
-        ConsoleDisplayUtils.choosePracticePeriod(min,max);
+
+        ConsoleDisplayUtils.displayPeriod(wordsList);
+//        ConsoleDisplayUtils.choosePracticePeriod(min, max);
 
         String inputDateRange = CommonLineScan.getInputDateRange((inputStr) -> !(Pattern.matches(CommonLineScan.p, inputStr) || CommonLineScan.QUIT.equals(inputStr)),
                 (inputStr) -> {
                     if (inputStr == null || "".equals(inputStr)) {
-                        return min + " To " + max;
+                        return wordsList.stream().map(Words::getBuildDate).min(String::compareTo).get() + " To " + wordsList.stream().map(Words::getBuildDate).max(String::compareTo).get();
                     }
                     return inputStr;
                 });
@@ -40,7 +42,7 @@ public class MainClass {
         List<String> rangeBeHandle = Stream.of(dateRange.split("To")).map(String::trim).collect(Collectors.toList());
 
 
-        StateMachineManager machineManager = new StateMachineManager(wordsList,rangeBeHandle,new DefaultAlgorithm());
+        StateMachineManager machineManager = new StateMachineManager(wordsList, rangeBeHandle, new DefaultAlgorithm());
         machineManager.startPractice();
     }
 

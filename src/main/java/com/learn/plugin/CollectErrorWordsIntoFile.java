@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learn.domain.WordsWrapper;
 import com.learn.utils.ParseProperties;
 import com.learn.utils.WriteFile;
-import com.learn.utils.pluginType.AfterType;
+import com.learn.plugin.pluginType.AfterType;
 
 import java.util.List;
 

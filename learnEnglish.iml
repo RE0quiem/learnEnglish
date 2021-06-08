@@ -2,20 +2,7 @@
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="AspectJ" name="AspectJ">
-      <configuration>
-        <option name="weaveOnly" value="true" />
-        <option name="aspectPath">
-          <projectLibrary>
-            <option name="name" value="Maven: org.aspectj:aspectjrt:1.8.9" />
-          </projectLibrary>
-          <projectLibrary>
-            <option name="name" value="Maven: org.aspectj:aspectjtools:1.8.9" />
-          </projectLibrary>
-          <projectLibrary>
-            <option name="name" value="Maven: org.aspectj:aspectjweaver:1.7.4" />
-          </projectLibrary>
-        </option>
-      </configuration>
+      <configuration />
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
@@ -39,7 +26,7 @@
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.12" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.8.9" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjtools:1.8.9" level="project" />
-    <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.7.4" level="project" />
+    <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.8.9" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" name="Maven: javax.annotation:javax.annotation-api:1.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.reflections:reflections:0.9.11" level="project" />

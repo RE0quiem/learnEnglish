@@ -1,7 +1,7 @@
 package com.learn.plugin;
 
-import com.learn.utils.pluginType.AfterType;
-import com.learn.utils.pluginType.BeforeType;
+import com.learn.plugin.pluginType.AfterType;
+import com.learn.plugin.pluginType.BeforeType;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MemberUsageScanner;
@@ -30,6 +30,8 @@ public class PluginManager {
 
     private Map<String,Plugin> afterPlugins=new TreeMap<>();
 
+    private Map<String,? super CustomPlugin> customPluginMap=new TreeMap<>();
+
     public static PluginManager getInstence() {
         return instence;
     }
@@ -37,7 +39,7 @@ public class PluginManager {
 
     public PluginManager(){
         // 初始化加载插件
-        Reflections reflections = new Reflections("com.learn.plugin.*", Arrays.asList(
+        Reflections reflections = new Reflections("com.learn.*", Arrays.asList(
                 new SubTypesScanner(false)
                 , new MethodParameterNamesScanner()
                 , new MethodAnnotationsScanner()
@@ -47,6 +49,8 @@ public class PluginManager {
         ));
         Set<Class<?>> afterTypeClazzs = reflections.getTypesAnnotatedWith(AfterType.class);
         Set<Class<?>> beforeTypeClazzs = reflections.getTypesAnnotatedWith(BeforeType.class);
+        Set<Class<? extends CustomPlugin>> customPlugins = reflections.getSubTypesOf(CustomPlugin.class);
+
 
         try {
             for (Class<?> clazz : beforeTypeClazzs) {
@@ -55,6 +59,10 @@ public class PluginManager {
 
             for (Class<?> clazz : afterTypeClazzs) {
                 afterPlugins.put(clazz.getName(),(Plugin)clazz.newInstance());
+            }
+
+            for (Class<? extends CustomPlugin> customPluginClazz : customPlugins) {
+                customPluginMap.put(customPluginClazz.getName(),customPluginClazz.newInstance());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,5 +76,9 @@ public class PluginManager {
 
     public Map<String, Plugin> getAfterPlugins() {
         return afterPlugins;
+    }
+
+    public Map<String, ? super CustomPlugin> getCustomPlugins() {
+        return customPluginMap;
     }
 }

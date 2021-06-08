@@ -96,6 +96,7 @@ public class ConsoleDisplayUtils {
                             String alternativeTwo = lastWeek + " To " + lastPeriod;
                             list.add(alternativeOne);
                             list.add(alternativeTwo);
+                            list.add("no input (this represent select all)");
                             return list;
                         }));
 
@@ -105,14 +106,14 @@ public class ConsoleDisplayUtils {
         StringBuilder next;
         System.out.println(periodTitle);
         int j;
-        int k=32;
+        int k=36;
         List<String> lineStr = new ArrayList<>();
         for (int i = 0; i < lineNum; i++) {
             j = 0;
             while (iterator.hasNext()) {
-                next = new StringBuilder("\t\t"+iterator.next());
+                next = new StringBuilder(iterator.next());
                 for (int l = 0; l < k - next.length(); l++) {
-                    next.append(" ");
+                    next.append("       ");
                 }
                 lineStr.add(next.toString());
                 if (j == 2) {

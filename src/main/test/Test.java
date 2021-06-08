@@ -1,4 +1,4 @@
-import com.learn.utils.pluginType.BeforeType;
+import com.learn.plugin.pluginType.BeforeType;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MemberUsageScanner;

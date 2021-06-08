@@ -14,11 +14,11 @@ import org.aspectj.lang.annotation.Aspect;
  * @date 2021/5/28 13:55
  * @since JDK 1.8
  */
-@Aspect
+//@Aspect
 public class OnErrorAdvice {
 
 
-    @Around(value = "execution(* com.learn.algorithm.AbstractAlgorithm.handleError(*))")
+//    @Around(value = "execution(* com.learn.algorithm.AbstractAlgorithm.handleError(*))")
     public Object onErrorCollectStrategy(ProceedingJoinPoint joinPoint) throws Throwable {
         WordsWrapper wordsWrapper = (WordsWrapper) joinPoint.getArgs()[0];
         if (wordsWrapper.getErrorTimes() >= StateMachineManager.recordWordErrorTimes-1) {

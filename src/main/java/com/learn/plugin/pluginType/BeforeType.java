@@ -1,4 +1,4 @@
-package com.learn.utils.pluginType;
+package com.learn.plugin.pluginType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

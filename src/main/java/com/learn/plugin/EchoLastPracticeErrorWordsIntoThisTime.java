@@ -6,7 +6,7 @@ import com.learn.algorithm.AbstractAlgorithm;
 import com.learn.domain.Words;
 import com.learn.domain.WordsWrapper;
 import com.learn.utils.ParseProperties;
-import com.learn.utils.pluginType.BeforeType;
+import com.learn.plugin.pluginType.BeforeType;
 
 import java.io.File;
 import java.io.IOException;

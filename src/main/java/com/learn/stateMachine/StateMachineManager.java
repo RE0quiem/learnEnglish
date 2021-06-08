@@ -97,11 +97,13 @@ public class StateMachineManager {
         ConsoleDisplayUtils.nextTurn(turn);
         ArrayList<WordsWrapper> nextTurnList = new ArrayList<>();
         WordsWrapper thisTimeWordsResult;
+        int i=0;
         for (WordsWrapper wordsWrapper : this.algorithm.shufflePracticeWordsList(turnList)) {
-            thisTimeWordsResult = stateMachine.run(wordsWrapper, turn);
+            thisTimeWordsResult = stateMachine.run(wordsWrapper, turn ,pluginManager.getCustomPlugins());
             if (thisTimeWordsResult.getErrorTimes() > 0) {
                 nextTurnList.add(wordsWrapper);
             }
+            i++;
         }
 
         if (CollectionUtils.isNotEmpty(nextTurnList)) {

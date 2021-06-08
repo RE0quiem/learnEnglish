@@ -8,9 +8,9 @@ package com.learn.plugin;
  * @date 2021/6/8 15:24
  * @since JDK 1.8
  */
-public class PlayMp3 extends CustomPlugin {
+public class PlayMp3Plugin extends CustomPlugin {
 
-    public PlayMp3() {
+    public PlayMp3Plugin() {
         runningTime=enumRunningTime[0];
     }
 

@@ -3,7 +3,7 @@ package com.learn.stateMachine;
 import com.learn.algorithm.AbstractAlgorithm;
 import com.learn.domain.WordsWrapper;
 import com.learn.plugin.CustomPlugin;
-import com.learn.plugin.PlayMp3;
+import com.learn.plugin.PlayMp3Plugin;
 import com.learn.plugin.pluginType.CustomPluginType;
 import com.learn.utils.CommonLineScan;
 import com.learn.utils.ConsoleDisplayUtils;
@@ -25,7 +25,7 @@ public class StateMachine {
     }
 
     //todo 由于没有依赖注入,本方法的切面是无法拿到pluginManager中的customPlugins的.所以在这个地方添加这个作为参数传入切面
-    @CustomPluginType(plugins = {PlayMp3.class})
+    @CustomPluginType(plugins = {PlayMp3Plugin.class})
     public WordsWrapper run(WordsWrapper wordsWrapper, int turn , Map<String, ? super CustomPlugin> customPlugins) {
         // display the practice words
         String practiceResult = displayThePracticeWords(wordsWrapper);

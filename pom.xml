@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>learnEnglish</artifactId>
-    <version>1.0-RELEASE</version>
+    <version>1.1-RELEASE</version>
 
 
     <dependencies>
@@ -73,7 +73,22 @@
             <artifactId>commons-io</artifactId>
             <version>2.9.0</version>
         </dependency>
-
+        <!--        todo 这3个jar下不下来,本地依赖算了,path:lib-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.tritonus</groupId>-->
+        <!--            <artifactId>tritonus_share</artifactId>-->
+        <!--            <version>0.3.6</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>javazoom.spi</groupId>-->
+        <!--            <artifactId>MP3SPI</artifactId>-->
+        <!--            <version>1.9.4.1</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>javazoom.jl</groupId>-->
+        <!--            <artifactId>JLayer</artifactId>-->
+        <!--            <version>1.0</version>-->
+        <!--        </dependency>-->
 
     </dependencies>
 </project>

@@ -8,6 +8,9 @@ import com.learn.utils.ConsoleDisplayUtils;
 import com.learn.utils.ParseExcel;
 
 import java.util.List;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,6 +24,10 @@ import java.util.stream.Stream;
  * @since JDK 1.8
  */
 public class MainClass {
+    public static ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 1,
+            5L, TimeUnit.MINUTES,
+            new LinkedBlockingQueue<Runnable>());
+
     public static void main(String[] args) {
         ParseExcel parseExcel = new ParseExcel();
         List<Words> wordsList = parseExcel.getWordsList();
@@ -44,6 +51,14 @@ public class MainClass {
 
         StateMachineManager machineManager = new StateMachineManager(wordsList, rangeBeHandle, new DefaultAlgorithm());
         machineManager.startPractice();
+
+        shutDownPool();
+    }
+
+    public static void shutDownPool() {
+        if (!executor.isShutdown()) {
+            executor.shutdownNow();
+        }
     }
 
 }

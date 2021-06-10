@@ -1,3 +1,6 @@
+import com.learn.domain.Words;
+import com.learn.domain.WordsWrapper;
+import com.learn.plugin.PlayMp3Plugin;
 import com.learn.plugin.pluginType.BeforeType;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
@@ -9,6 +12,7 @@ import org.reflections.scanners.TypeAnnotationsScanner;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 /**
@@ -45,5 +49,17 @@ public class Test {
     @org.junit.jupiter.api.Test
     public void testFileWrite() {
 //        WriteFile.writeFile(null,"aaaa");?
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testPlayMp3() throws InterruptedException {
+        Words words = new Words();
+        words.setWords("get");
+        WordsWrapper wordsWrapper = new WordsWrapper();
+        wordsWrapper.setWords(words);
+
+        PlayMp3Plugin mp3Plugin = new PlayMp3Plugin();
+        mp3Plugin.apply(new Object[]{wordsWrapper});
+        TimeUnit.SECONDS.sleep(10);
     }
 }

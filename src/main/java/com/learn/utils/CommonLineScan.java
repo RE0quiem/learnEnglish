@@ -1,5 +1,7 @@
 package com.learn.utils;
 
+import com.learn.main.MainClass;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -49,6 +51,7 @@ public class CommonLineScan {
 
     private static void interruptedMainThread() {
         // todo 后面用interrupt改造
+        MainClass.shutDownPool();
         Thread.currentThread().stop();
     }
 }

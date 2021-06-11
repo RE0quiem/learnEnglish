@@ -1,5 +1,7 @@
 package com.learn.utils;
 
+import cn.hutool.core.io.resource.ClassPathResource;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Objects;
@@ -16,7 +18,8 @@ public class WriteFile {
 
     public void writeFile(String path, String jsonStr) {
         if (path == null) {
-            path = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath()+ "errorWordsRecord.txt";
+            final ParseProperties parseProperties = new ParseProperties();
+            path = parseProperties.parseProperties().getProperty("excelWordsFilePath");
         }
         File file = new File(path);
         if (file.exists()) {

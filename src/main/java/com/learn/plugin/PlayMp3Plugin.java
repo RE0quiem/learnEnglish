@@ -67,6 +67,7 @@ public class PlayMp3Plugin extends CustomPlugin{
                 AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedInputStream);
                 // 文件编码
                 AudioFormat audioFormat = audioInputStream.getFormat();
+                System.out.println(audioInputStream);
                 // 转换文件编码
                 if (audioFormat.getEncoding() != AudioFormat.Encoding.PCM_SIGNED) {
                     audioFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, audioFormat.getSampleRate(), 16, audioFormat.getChannels(), audioFormat.getChannels() * 2, audioFormat.getSampleRate(), false);

@@ -29,7 +29,7 @@ public class CustomPluginAdvice {
     // 个代理入口类.一个是StateMachine$AjcClosure1.class,一个是StateMachineManager$AjcClosure1.class.按
     // 道理我代理的是StateMachine应该和StateMachineManager没有什么关系.后者生成的副作用就是在我执行切面的时候
     // 会执行重复的两次...断点进入代理类发现target对象中joinPoint属性两次调用不一致,原因未知.
-    @Around(value = "execution(* *.*(..)) && @annotation(com.learn.plugin.pluginType.CustomPluginType)")
+    @Around(value = "execution(* *.*(..)) && !execution(* com.learn.algorithm.AbstractAlgorithm.handleError(*))&& @annotation(com.learn.plugin.pluginType.CustomPluginType)")
     public Object doCustomPlugin(ProceedingJoinPoint joinPoint) throws Throwable {
         Map<String, CustomPlugin> customPlugins = (Map<String, CustomPlugin>) joinPoint.getArgs()[2];
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
@@ -47,9 +47,9 @@ public class CustomPluginAdvice {
         Map<String, List<CustomPlugin>> customTypeList = customPlugins
                 .entrySet()
                 .stream()
-                .filter(entry-> tagPluginNames
+                .filter(entry -> tagPluginNames
                         .stream()
-                        .anyMatch(e->e.equals(entry.getKey())))
+                        .anyMatch(e -> e.equals(entry.getKey())))
                 .map(Map.Entry::getValue)
                 .collect(Collectors
                         .groupingBy(CustomPlugin::getRunningTime));

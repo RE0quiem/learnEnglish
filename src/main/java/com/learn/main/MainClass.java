@@ -29,7 +29,7 @@ public class MainClass {
             new LinkedBlockingQueue<Runnable>());
 
     public static void main(String[] args) {
-        ParseExcel parseExcel = new ParseExcel();
+        ParseExcel parseExcel = new ParseExcel(args);
         List<Words> wordsList = parseExcel.getWordsList();
         String max = wordsList.stream().map(Words::getBuildDate).max(String::compareTo).get();
         String min = wordsList.stream().map(Words::getBuildDate).min(String::compareTo).get();

@@ -1,12 +1,12 @@
 package com.learn.utils;
 
+import cn.hutool.core.io.resource.ClassPathResource;
 import org.eclipse.core.runtime.Assert;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Properties;
 
 /**
@@ -19,24 +19,18 @@ import java.util.Properties;
  */
 public class ParseProperties {
     public Properties parseProperties() {
-        URL resource = getClass().getClassLoader().getResource("properties.properties");
+        InputStream inStream = this.getClass().getResourceAsStream("/properties.properties");
         Properties properties = new Properties();
-        Assert.isTrue(resource != null);
-        File file = new File(resource.getFile());
-        if (file.exists()) {
-            InputStream inStream = null;
+        if (inStream!=null) {
             try {
-                inStream = new FileInputStream(file);
                 properties.load(inStream);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                if (inStream != null) {
-                    try {
-                        inStream.close();//关闭流
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    inStream.close();//关闭流
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }

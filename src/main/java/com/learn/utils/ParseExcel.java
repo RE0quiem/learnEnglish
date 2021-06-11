@@ -1,5 +1,6 @@
 package com.learn.utils;
 
+import cn.hutool.core.io.resource.ClassPathResource;
 import com.learn.domain.Words;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -10,8 +11,10 @@ import org.eclipse.core.runtime.Assert;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,17 +32,20 @@ import java.util.List;
  */
 // todo 后面添加校验excel日期是否存在的功能
 public class ParseExcel {
-    URL url = null;
     List<Words> wordsList;
+    private InputStream inputStream=null;
 
-    public ParseExcel() {
-        this(null);
-    }
-
-    public ParseExcel(String filePath) {
-        if (filePath == null) {
-            URL resource = getClass().getClassLoader().getResource("learn.xls");
-            this.url = resource;
+    public ParseExcel(Object[] args) {
+        if (args == null || args.length == 0) {
+//            file = new File(new ClassPathResource("classPath:learn.xls").getUrl().getPath());
+            inputStream=this.getClass().getResourceAsStream("/learn.xls");
+        } else {
+            File file = new File((String) args[0]);
+            try {
+                inputStream = new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -51,12 +57,9 @@ public class ParseExcel {
     }
 
     private void readFile() {
-        File file = new File(this.url.getFile());
+        Assert.isTrue(inputStream!=null);
         HSSFWorkbook wb = null;
-        InputStream inputStream = null;
         try {
-            inputStream = new FileInputStream(file);
-
             wb = new HSSFWorkbook(inputStream);
         } catch (IOException e) {
             e.printStackTrace();

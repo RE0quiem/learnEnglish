@@ -8,6 +8,11 @@
     <artifactId>learnEnglish</artifactId>
     <version>1.1-RELEASE</version>
 
+    <properties>
+        <mojo.java.target>1.8</mojo.java.target>
+        <project.build.java.target>1.8</project.build.java.target>
+        <aspectj.version>1.8.13</aspectj.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -22,24 +27,19 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
-        </dependency>
-        <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
-            <version>1.8.9</version>
+            <version>${aspectj.version}</version>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjtools</artifactId>
-            <version>1.8.9</version>
+            <version>${aspectj.version}</version>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.8.9</version>
+            <version>${aspectj.version}</version>
         </dependency>
 
         <dependency>
@@ -73,6 +73,12 @@
             <artifactId>commons-io</artifactId>
             <version>2.9.0</version>
         </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>5.6.7</version>
+        </dependency>
+
         <!--        todo 这3个jar下不下来,本地依赖算了,path:lib-->
         <!--        <dependency>-->
         <!--            <groupId>org.tritonus</groupId>-->
@@ -91,4 +97,63 @@
         <!--        </dependency>-->
 
     </dependencies>
+    <build>
+        <plugins>
+            <!--             mvn clean aspectj:compile package-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                    <mainClass>com.learn.main.MainClass</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>1.11</version>
+                <configuration>
+                    <showWeaveInfo>true</showWeaveInfo>
+                    <source>${mojo.java.target}</source>
+                    <complianceLevel>${mojo.java.target}</complianceLevel>
+                    <target>${project.build.java.target}</target>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjtools</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.yml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
+
+
 </project>

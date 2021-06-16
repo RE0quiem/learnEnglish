@@ -62,4 +62,15 @@ public class Test {
         mp3Plugin.apply(new Object[]{wordsWrapper});
         TimeUnit.SECONDS.sleep(10);
     }
+
+    @org.junit.jupiter.api.Test
+    public void byteToStr(){
+        byte[] bytes = new byte[1];
+        byte[] bytes2 = new byte[1];
+        bytes[0]=51;
+        bytes2[0]=52;
+        String s = new String(bytes);
+        String s2 = new String(bytes2);
+        System.out.println(s);
+    }
 }

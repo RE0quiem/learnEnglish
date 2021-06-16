@@ -41,6 +41,7 @@ public class EchoLastPracticeErrorWordsIntoThisTime implements Plugin {
         List<Words> lastErrorWords = null;
 
         try {
+            // todo  com.fasterxml.jackson.databind.JsonMappingException: No content to map due to end-of-input
             lastErrorWords = objectMapper.readValue(file, new TypeReference<List<Words>>() {
             });
         } catch (IOException e) {

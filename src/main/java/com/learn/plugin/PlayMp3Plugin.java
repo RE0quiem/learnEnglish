@@ -43,7 +43,7 @@ public class PlayMp3Plugin extends CustomPlugin{
             //https://fanyi.baidu.com/gettts?lan=en&text=spring!&spd=3&source=web
             pram.put("lan", LANG);
             pram.put("text", wordsWrapper.getWords().getWords().replaceAll(" ", ""));
-            pram.put("spd", "6");
+            pram.put("spd", "5");
             pram.put("source", "web");
 
             byte[] mp3Bytes = GetNetResourceByUrl.GetNetResourceByUrl(TTSURL, pram);
@@ -67,7 +67,6 @@ public class PlayMp3Plugin extends CustomPlugin{
                 AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedInputStream);
                 // 文件编码
                 AudioFormat audioFormat = audioInputStream.getFormat();
-                System.out.println(audioInputStream);
                 // 转换文件编码
                 if (audioFormat.getEncoding() != AudioFormat.Encoding.PCM_SIGNED) {
                     audioFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, audioFormat.getSampleRate(), 16, audioFormat.getChannels(), audioFormat.getChannels() * 2, audioFormat.getSampleRate(), false);

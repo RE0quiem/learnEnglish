@@ -7,6 +7,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.util.StringUtil;
 import org.eclipse.core.runtime.Assert;
 
 import java.io.File;
@@ -104,7 +105,7 @@ public class ParseExcel {
                         words.setBuildDate(lastDateRecord);
                         break;
                     case 1:
-                        words.setWords(cell.getStringCellValue());
+                        words.setWords(cell.getStringCellValue().trim());
                         break;
                     case 2:
                         words.setPhoneticSymbol(cell.getStringCellValue());

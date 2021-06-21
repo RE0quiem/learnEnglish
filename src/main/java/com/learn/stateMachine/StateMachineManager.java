@@ -3,6 +3,7 @@ package com.learn.stateMachine;
 import com.learn.algorithm.AbstractAlgorithm;
 import com.learn.domain.Words;
 import com.learn.domain.WordsWrapper;
+import com.learn.plugin.InputPractice;
 import com.learn.plugin.Plugin;
 import com.learn.plugin.PluginManager;
 import com.learn.utils.ConsoleDisplayUtils;
@@ -85,7 +86,7 @@ public class StateMachineManager {
         }
 
         final Object wordsSaveFilePath = new ParseProperties().parseProperties().get("errorWordsSaveFilePath");
-        long accuracy = Integer.toUnsignedLong(errorTimesOverSpecialTimesList.size() / allWordsInExcel.size());
+        double accuracy = errorTimesOverSpecialTimesList.size()*1.0 / allWordsInExcel.size();
         ConsoleDisplayUtils.practiceComplete((String)wordsSaveFilePath,
                 recordWordErrorTimes,
                 errorTimesOverSpecialTimesList.size(),
@@ -95,6 +96,7 @@ public class StateMachineManager {
 
     private void runByTurn(List<WordsWrapper> turnList, int turn) {
         ConsoleDisplayUtils.nextTurn(turn);
+        InputPractice.isEnableWordsInput();
         ArrayList<WordsWrapper> nextTurnList = new ArrayList<>();
         WordsWrapper thisTimeWordsResult;
         int i=0;

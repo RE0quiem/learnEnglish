@@ -23,7 +23,7 @@ import java.util.Map;
  * @date 2021/6/8 15:24
  * @since JDK 1.8
  */
-public class PlayMp3Plugin extends CustomPlugin{
+public class PlayMp3Plugin extends CustomPlugin {
     private final String TTSURL = "https://fanyi.baidu.com/gettts";
     private final String LANG = "en";
     // todo 后面考虑换成guava的cacheBuilder
@@ -101,4 +101,8 @@ public class PlayMp3Plugin extends CustomPlugin{
         });
     }
 
+    @Override
+    public Integer get() {
+        return 1;
+    }
 }

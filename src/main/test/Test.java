@@ -73,4 +73,10 @@ public class Test {
         String s2 = new String(bytes2);
         System.out.println(s);
     }
+
+    @org.junit.jupiter.api.Test
+    public void testaccuracy(){
+        double accuracy = (10*1.0) / 40;
+        System.out.println(accuracy);
+    }
 }

@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 public class ConsoleDisplayUtils {
     final private static String practiceBoxTop =
             ".=============================================================================================.\n" +
-                    "||                                         words:%s +\n" +
-                    "||                             phoneticSymbol:%s  practiceTimes:%s +\n" +
+                    "||                                         words:%s \n" +
+                    "||            phoneticSymbol:%s  practiceTimes:%s  characteristic:%s\n" +
                     "|'---------------------------------------------------------------------------------------------'|\n" +
                     "||                                      \t\t\t\t\t\t\t\t\t\t\t\t\t   ||\n" +
                     "||\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   ||\n" +
@@ -66,7 +66,7 @@ public class ConsoleDisplayUtils {
     }
 
     public static void displayThePracticeWords(WordsWrapper wordsWrapper) {
-        System.out.println(String.format(practiceBoxTop, wordsWrapper.getWords().getWords(), wordsWrapper.getWords().getPhoneticSymbol(), wordsWrapper.getErrorTimes()));
+        System.out.println(String.format(practiceBoxTop, wordsWrapper.getWords().getWords(), wordsWrapper.getWords().getPhoneticSymbol(), wordsWrapper.getErrorTimes(),wordsWrapper.getWords().getCharacteristic()));
     }
 
     public static void nextStep() {
@@ -77,7 +77,7 @@ public class ConsoleDisplayUtils {
         System.out.println(String.format(nextLoop, turn));
     }
 
-    public static void practiceComplete(String errorWordsSaveFilePath, int propertiesErrorTime, int totalErrorTimes, long accuracy) {
+    public static void practiceComplete(String errorWordsSaveFilePath, int propertiesErrorTime, int totalErrorTimes, double accuracy) {
         System.out.println(String.format(completeDisplay, errorWordsSaveFilePath, propertiesErrorTime, totalErrorTimes, accuracy));
     }
 
@@ -126,5 +126,13 @@ public class ConsoleDisplayUtils {
         }
 
         System.out.println(periodFooter);
+    }
+
+    public static void spellWordsInput() {
+        System.out.print("Spell words:");
+    }
+
+    public static void isEnableWordsInput() {
+        System.out.print("isEnableWordsInput:");
     }
 }

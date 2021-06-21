@@ -1,6 +1,7 @@
 package com.learn.plugin;
 
 import com.learn.plugin.pluginType.CustomPluginType;
+import com.learn.utils.ConsoleDisplayUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -8,8 +9,13 @@ import org.aspectj.lang.reflect.MethodSignature;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -52,7 +58,13 @@ public class CustomPluginAdvice {
                         .anyMatch(e -> e.equals(entry.getKey())))
                 .map(Map.Entry::getValue)
                 .collect(Collectors
-                        .groupingBy(CustomPlugin::getRunningTime));
+                        .groupingBy(CustomPlugin::getRunningTime,
+                                TreeMap::new,
+                                Collectors
+                                        .collectingAndThen(Collectors.toList(), list->{
+                                            list.sort(Comparator.comparingInt(Supplier::get));
+                                            return list;
+                                        })));
         if (customTypeList.get("before") != null) {
             for (CustomPlugin before : customTypeList.get("before")) {
                 before.apply(joinPoint.getArgs());
@@ -67,6 +79,8 @@ public class CustomPluginAdvice {
             }
         }
 
+        // complete
+        ConsoleDisplayUtils.nextStep();
         return returnData;
     }
 }

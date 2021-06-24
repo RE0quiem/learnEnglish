@@ -2,6 +2,7 @@ package com.learn.stateMachine;
 
 import com.learn.algorithm.AbstractAlgorithm;
 import com.learn.domain.Words;
+import com.learn.domain.WordsFunction.IteratorForWordsList;
 import com.learn.domain.WordsWrapper;
 import com.learn.plugin.InputPractice;
 import com.learn.plugin.Plugin;
@@ -86,8 +87,8 @@ public class StateMachineManager {
         }
 
         final Object wordsSaveFilePath = new ParseProperties().parseProperties().get("errorWordsSaveFilePath");
-        double accuracy = errorTimesOverSpecialTimesList.size()*1.0 / allWordsInExcel.size();
-        ConsoleDisplayUtils.practiceComplete((String)wordsSaveFilePath,
+        double accuracy = errorTimesOverSpecialTimesList.size() * 1.0 / allWordsInExcel.size();
+        ConsoleDisplayUtils.practiceComplete((String) wordsSaveFilePath,
                 recordWordErrorTimes,
                 errorTimesOverSpecialTimesList.size(),
                 accuracy);
@@ -99,13 +100,20 @@ public class StateMachineManager {
         InputPractice.isEnableWordsInput();
         ArrayList<WordsWrapper> nextTurnList = new ArrayList<>();
         WordsWrapper thisTimeWordsResult;
-        int i=0;
-        for (WordsWrapper wordsWrapper : this.algorithm.shufflePracticeWordsList(turnList)) {
-            thisTimeWordsResult = stateMachine.run(wordsWrapper, turn ,pluginManager.getCustomPlugins());
-            if (thisTimeWordsResult.getErrorTimes() > 0) {
-                nextTurnList.add(wordsWrapper);
+        List<WordsWrapper> wordsWrappers = this.algorithm.shufflePracticeWordsList(turnList);
+        IteratorForWordsList iterator = new IteratorForWordsList(wordsWrappers);
+        while (true) {
+            thisTimeWordsResult = stateMachine.run(iterator.next(), turn, pluginManager.getCustomPlugins());
+            if (thisTimeWordsResult == null) {
+                thisTimeWordsResult = stateMachine.run(iterator.jumpPreved(), turn, pluginManager.getCustomPlugins());
             }
-            i++;
+
+            if (thisTimeWordsResult.getErrorTimes() > 0) {
+                nextTurnList.add(thisTimeWordsResult);
+            }
+            if (!iterator.hasNext()) {
+                break;
+            }
         }
 
         if (CollectionUtils.isNotEmpty(nextTurnList)) {

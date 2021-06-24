@@ -21,10 +21,11 @@ public class ConsoleDisplayUtils {
             ".=============================================================================================.\n" +
                     "||                                         words:%s \n" +
                     "||            phoneticSymbol:%s  practiceTimes:%s  characteristic:%s\n" +
+                    "||            exampleSentence:%s\n" +
                     "|'---------------------------------------------------------------------------------------------'|\n" +
                     "||                                      \t\t\t\t\t\t\t\t\t\t\t\t\t   ||\n" +
                     "||\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   ||\n" +
-                    "||\t\t\t\t\t\twhat means?                                 eg(y|n|:q) \t\t\t\t   ||\n" +
+                    "||\t\t\t\t\t\twhat means?                            eg(y|n|back|:q) \t\t\t\t   ||\n" +
                     "||\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   ||\n" +
                     ".'============================================================================================='.";
 
@@ -66,7 +67,7 @@ public class ConsoleDisplayUtils {
     }
 
     public static void displayThePracticeWords(WordsWrapper wordsWrapper) {
-        System.out.println(String.format(practiceBoxTop, wordsWrapper.getWords().getWords(), wordsWrapper.getWords().getPhoneticSymbol(), wordsWrapper.getErrorTimes(),wordsWrapper.getWords().getCharacteristic()));
+        System.out.println(String.format(practiceBoxTop, wordsWrapper.getWords().getWords(), wordsWrapper.getWords().getPhoneticSymbol(), wordsWrapper.getErrorTimes(),wordsWrapper.getWords().getCharacteristic(),wordsWrapper.getWords().getExampleSentence()));
     }
 
     public static void nextStep() {

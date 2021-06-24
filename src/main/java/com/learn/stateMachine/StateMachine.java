@@ -30,11 +30,14 @@ public class StateMachine {
     public WordsWrapper run(WordsWrapper wordsWrapper, int turn , Map<String, ? super CustomPlugin> customPlugins) {
         // display the practice words
         String practiceResult = displayThePracticeWords(wordsWrapper);
-        // input Y | input N
+        // input Y | input N | input back
         if ("y".equals(practiceResult)) {
             algorithm.handleSuccess(wordsWrapper);
-        } else {
+        } else if ("n".equals(practiceResult)) {
             algorithm.handleError(wordsWrapper);
+        } else {
+            // forward prev wordWrapper
+            return null;
         }
         return wordsWrapper;
     }

@@ -1,5 +1,7 @@
 package com.learn.domain;
 
+import com.learn.domain.WordsFunction.WordsFunction;
+
 /**
  * @author zjz
  * @version 1.0
@@ -8,7 +10,7 @@ package com.learn.domain;
  * @date 2021/5/16 下午2:31
  * @since JDK 1.8
  */
-public class WordsWrapper {
+public class WordsWrapper extends WordsFunction {
     private int errorTimes;
     private Words words;
 

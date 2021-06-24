@@ -22,6 +22,7 @@ public class CommonLineScan {
         {
             this.add("y");
             this.add("n");
+            this.add("back");
         }
     };
 
